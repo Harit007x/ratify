@@ -1,6 +1,12 @@
-import './globals.css'
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import Link from "next/link"
+import './globals.css';
+import type { Metadata } from 'next';
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
+import { Inter } from 'next/font/google';
+import { MainNav } from "@/components/main-nav";
+import { marketingConfig } from "@/config/marketingConfig";
+import { SiteFooter } from "@/components/site-footer";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,8 +21,25 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <div className="flex min-h-screen flex-col">
+      <header className="container z-40 bg-background">
+        <div className="flex h-20 items-center justify-between py-6">
+          <MainNav items={marketingConfig.mainNav} />
+          <nav>
+            <Link
+              href="/login"
+              className={cn(
+                buttonVariants({ variant: "secondary", size: "sm" }),
+                "px-4"
+              )}
+            >
+              Login
+            </Link>
+          </nav>
+        </div>
+      </header>
+      <main className="flex-1">{children}</main>
+      <SiteFooter />
+    </div>
   )
 }

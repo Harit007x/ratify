@@ -4,6 +4,10 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from "next/navigation";
 import axios from 'axios';
 import toast from "react-hot-toast";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
+import { UserAuthForm } from "@/components/login-form";
+import { Icons } from "@/components/icons";
 
 export default function LoginPage(){
     const router = useRouter();
@@ -40,36 +44,39 @@ export default function LoginPage(){
     }, [user])
 
     return (
-        <div
-            className="flex flex-col items-center justify-center min--screen py-2"
-        >
-            <h1>{loading ? "Processing" : "Login"}</h1>
-            <hr/>
-            <label htmlFor="email">email</label>
-            <input 
-                className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 text-black"
-                id="email"
-                type="text"
-                value={user.email}
-                onChange={(e) => setUser({...user, email: e.target.value})}
-                placeholder="email"
-            />
-            <label htmlFor="password">password</label>
-            <input 
-                className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 text-black"
-                id="password"
-                type="password"
-                value={user.password}
-                onChange={(e) => setUser({...user, password: e.target.value})}
-                placeholder="password"
-            />
-            <button
-                className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600"
-                onClick={onLogin}
+        <div className="container flex h-screen w-screen flex-col items-center justify-center">
+            <Link
+                href="/"
+                className={cn(
+                buttonVariants({ variant: "ghost" }),
+                "absolute left-4 top-4 md:left-8 md:top-8"
+                )}
             >
-                Login Here
-            </button>
-            <Link href="/signup">Visit Signup page</Link>
+                <>
+                <Icons.chevronLeft className="mr-2 h-4 w-4" />
+                Back
+                </>
+            </Link>
+            <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+                <div className="flex flex-col space-y-2 text-center">
+                <Icons.logo className="mx-auto h-6 w-6" />
+                <h1 className="text-2xl font-semibold tracking-tight">
+                    Welcome back
+                </h1>
+                <p className="text-sm text-muted-foreground">
+                    Enter your email to sign in to your account
+                </p>
+                </div>
+                <UserAuthForm />
+                <p className="px-8 text-center text-sm text-muted-foreground">
+                <Link
+                    href="/signup"
+                    className="hover:text-brand underline underline-offset-4"
+                >
+                    Don&apos;t have an account? Sign Up
+                </Link>
+                </p>
+            </div>
         </div>
     )
 }
