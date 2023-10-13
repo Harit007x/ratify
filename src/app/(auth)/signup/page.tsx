@@ -4,8 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from "next/navigation";
 import axios from 'axios';
 import toast from "react-hot-toast";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { buttonVariants } from "@/components/ui/button";
 import { UserAuthForm } from "@/components/signup-form";
 import { Icons } from "@/components/icons";
 import { cn } from "@/lib/utils";
@@ -100,7 +99,7 @@ export default function SignUpPage(){
         <div className="lg:p-8">
           <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
             <div className="flex flex-col space-y-2 text-center">
-              <Icons.logo className="mx-auto h-6 w-6" />
+              {/* <Icons.logo className="mx-auto h-6 w-6" /> */}
               <h1 className="text-2xl font-semibold tracking-tight">
                 Create an account
               </h1>
